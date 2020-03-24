@@ -1,0 +1,35 @@
+<br>
+<br>
+
+<div class="card" style="width: 18rem;" >
+    <div class="card-body" >
+      <h5 class="card-title">Global Info :</h5>
+      <p class="card-text"> Cases till now are : {{ this.allDeathMap.cases }} </p>
+      <p class="card-text"> Deaths till now  are : {{ this.allDeathMap.deaths }} </p>
+      <p class="card-text"> Recovered cases are : {{ this.allDeathMap.recovered }} </p>
+      <p class="card-text"> Updated time is : {{ this.allDeathMap.updated }} </p>
+    </div>
+  </div>
+<p>Select a country for its casaulty data :</p>
+<form [formGroup]="casaulty" (ngSubmit)="onSubmit()">
+<select formControlName="country" (change) = " onPrintAllCountries(); onPrintThisCountry(this.casaulty.controls.country.value); ">
+        <option [value]="selected" *ngFor="let selected of allDeaths"> {{ selected }}</option>
+    </select>
+    <div class="card" style="width: 18rem;" *ngIf = " (currCountryInfo|json) != {} ">
+        <img class="card-img-top" class='img-responsive'
+        src= "{{ getCurrFlagLink() }}" alt="">
+        <div class="card-body" >
+          <h5 class="card-title">Current Information :</h5>
+          <p class="card-text"> Cases till now are : {{ currCountryInfo.cases }} </p>
+          <p class="card-text"> Cases today are : {{ currCountryInfo.todayCases }} </p>
+          <p class="card-text"> Deaths till now  are : {{ currCountryInfo.deaths }} </p>
+          <p class="card-text"> Deaths today are : {{ currCountryInfo.todayDeaths }} </p>
+          <p class="card-text"> Recovered cases are : {{ currCountryInfo.recovered }} </p>
+          <p class="card-text"> Active cases are : {{ currCountryInfo.active }} </p>
+          <p class="card-text"> Critical cases are : {{ currCountryInfo.critical }} </p>
+          <p class="card-text"> CasesPerOneMillion are : {{ currCountryInfo.casesPerOneMillion }} </p>
+        </div>
+      </div>
+    
+</form>
+
